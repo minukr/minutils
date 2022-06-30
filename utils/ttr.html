@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>regional_indicator 생성기</title>
+</head>
+<body>
+    <a class="back" href="../index.html">메인으로</a>
+    
+    <section>
+        <h1>regional_indicator 생성기</h1>
+        <h3>주의: 영어 알파벳 글자만 지원됩니다.</h3>
+        <input id="text" type="text" autocomplete="off" placeholder="여기에 텍스트 입력">
+        <button onclick="convert();">convert</button>
+        <br>
+        자동 복사
+        <input type="checkbox" id="check">
+    </section>
+
+
+    <script>
+        var input = document.getElementById("text")
+        var check = document.getElementById("check")
+        function convert(){
+            var text = input.value.toLowerCase();
+            var output = ""
+            for(var i = 0; i < text.length; i++){
+                if(text[i] != " "){
+                    output += `:regional_indicator_${text[i]}: `;
+                }
+                else{
+                    output += " ";
+                }
+            }
+            document.querySelector("h3").innerHTML = output;
+            
+            if(check.checked){
+                navigator.clipboard.writeText(output)
+            }
+        }
+        input.addEventListener("keydown", function(e){
+            if(e.key == "Enter"){
+                document.querySelector("button").click();
+            }
+        });
+
+    </script>
+</body>
+</html>
